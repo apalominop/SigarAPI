@@ -3,11 +3,12 @@
  */
 package com.insitel.iot.services;
 
-import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.insitel.iot.models.InfoSystemDTO;
 import com.insitel.iot.repositories.InfoSystemRepository;
 
 /**
@@ -24,7 +25,7 @@ public class InfoSystemService {
 	 * Método para obtener datos de la CPU
 	 * @return
 	 */
-	public ArrayList<String> obtenerDatosCPU() {
+	public Optional<InfoSystemDTO> obtenerDatosCPU() {
 		return infoSystemRepository.obtenerDatosSistema();
 	}
 	

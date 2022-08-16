@@ -3,6 +3,7 @@
  */
 package com.insitel.iot.controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.insitel.iot.message.FileMessage;
 import com.insitel.iot.models.Llave;
 import com.insitel.iot.services.LlaveService;
+import com.insitel.iot.utils.Utils;
 
 /**
  * @author Agustín Palomino Pardo
@@ -44,13 +46,30 @@ public class LlaveController {
 	}
 	
 	/**
+	 * Servicio para crear una nueva llave
+	 * @param llave
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "crear", method = RequestMethod.POST)
+	public ResponseEntity<FileMessage> crearLlave(@RequestBody Llave llave) throws Exception {
+		System.out.println(llave);
+		String message = "";
+		Date fecha = Utils.sumarDias(llave.getfCrea(), 1);
+		llave.setfCrea(fecha);
+		llaveService.guardarLlave(llave);
+		message = "Se creó la Llave exitosamente";
+		return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
+	}
+	
+	/**
 	 * Servicio para guardar y actualizar una llave
 	 * @param llave
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "actualizar", method = RequestMethod.POST)
-	public ResponseEntity<FileMessage> guardarLlave(@RequestBody Llave llave) throws Exception {
+	public ResponseEntity<FileMessage> actualizarLlave(@RequestBody Llave llave) throws Exception {
 		String message = "";
 		Long id = llave.getId();
 		

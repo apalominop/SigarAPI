@@ -49,13 +49,28 @@ public class DepartamentoController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "guardar", method = RequestMethod.POST)
-	public ResponseEntity<FileMessage> guardarDpto(@RequestBody Departamento departamento) throws Exception {
+	@RequestMapping(value = "actualizar", method = RequestMethod.POST)
+	public ResponseEntity<FileMessage> actualizarDpto(@RequestBody Departamento departamento) throws Exception {
 		String message = "";
 		departamentoService.guardarDpto(departamento);
 		message = "Se actualizó el Departamento exitosamente";
 		return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
 	}
+	
+	/**
+	 * Servicio para crear un nuevo departamento en una compañia determinada
+	 * @param dpto
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "crear", method = RequestMethod.POST)
+	public ResponseEntity<FileMessage> crearDpto(@RequestBody Departamento dpto) throws Exception {
+		String message = "";
+		departamentoService.guardarDpto(dpto);
+		message = "Se creó el Departamento exitosamente";
+		return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
+	}
+	
 	
 	/**
 	 * Servicio para obtener un Departamento por id

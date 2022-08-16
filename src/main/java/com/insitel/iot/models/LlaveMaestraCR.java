@@ -25,40 +25,40 @@ public class LlaveMaestraCR {
 	private Long id;
 
 	@Column(name = "mkc_mcr_id")
-	private Long cr;
+	private Long crId;
 
 	@Column(name = "mkc_key_id")
-	private Long llave;
-	
-	//**Getters y setters
+	private Long keyId;
 
 	public Long getId() {
 		return id;
 	}
 
+	
+	//**Getters y setters
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getCr() {
-		return cr;
+	public Long getCrId() {
+		return crId;
 	}
 
-	public void setCr(Long cr) {
-		this.cr = cr;
+	public void setCrId(Long crId) {
+		this.crId = crId;
 	}
 
-	public Long getLlave() {
-		return llave;
+	public Long getKeyId() {
+		return keyId;
 	}
 
-	public void setLlave(Long llave) {
-		this.llave = llave;
+	public void setKeyId(Long keyId) {
+		this.keyId = keyId;
 	}
 
 	@Override
 	public String toString() {
-		return "LlaveMaestraCR [id=" + id + ", cr=" + cr + ", llave=" + llave + "]";
+		return "LlaveMaestraCR [id=" + id + ", crId=" + crId + ", keyId=" + keyId + "]";
 	}
-
+	
 }

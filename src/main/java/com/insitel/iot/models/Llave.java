@@ -87,6 +87,10 @@ public class Llave implements Serializable {
 	public Date getfCrea() {
 		return fCrea;
 	}
+	
+	public void setfCrea(Date fCrea) {
+		this.fCrea = fCrea;
+	}
 
 	public String getCod() {
 		return cod;

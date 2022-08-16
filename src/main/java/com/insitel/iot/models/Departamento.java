@@ -28,6 +28,9 @@ public class Departamento {
 	@Column(name = "dep_name", length = 100)
 	private String nombre;
 	
+	@Column(name = "dep_cmp_id")
+	private Long ciaId;
+	
 	//**Getters y setters
 	public Long getId() {
 		return id;
@@ -45,9 +48,17 @@ public class Departamento {
 		this.nombre = nombre;
 	}
 
+	public Long getCiaId() {
+		return ciaId;
+	}
+
+	public void setCiaId(Long ciaId) {
+		this.ciaId = ciaId;
+	}
+
 	@Override
 	public String toString() {
-		return "Departamento [id=" + id + ", nombre=" + nombre + "]";
+		return "Departamento [id=" + id + ", nombre=" + nombre + ", ciaId=" + ciaId + "]";
 	}
 
 }

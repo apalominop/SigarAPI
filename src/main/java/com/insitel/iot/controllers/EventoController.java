@@ -209,7 +209,7 @@ public class EventoController {
 			eventos.setFecha(Date.valueOf(objetos[4].toString()));
 			eventos.setFechaEstimada(Boolean.parseBoolean(objetos[4].toString()));
 			eventos.setHora(LocalTime.parse(objetos[6].toString()));
-			eventos.setIdCR(Long.parseLong(objetos[7].toString()));
+			eventos.setIdCR(objetos[7].toString());
 			eventos.setNumeroArmario(objetos[8].toString());
 			eventos.setNumeroIA(objetos[9].toString());
 			lstEvensUser.add(eventos);

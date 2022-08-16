@@ -49,7 +49,7 @@ public class EventoUsuario {
 	private LocalTime hora;
 	
 	@Column(name = "uev_cr_id")
-	private Long idCR;
+	private String idCR;
 
 	@Column(name = "uev_cab_num", length = 3)
 	private String numeroArmario;
@@ -115,11 +115,11 @@ public class EventoUsuario {
 		this.hora = hora;
 	}
 
-	public Long getIdCR() {
+	public String getIdCR() {
 		return idCR;
 	}
 
-	public void setIdCR(Long idCR) {
+	public void setIdCR(String idCR) {
 		this.idCR = idCR;
 	}
 

@@ -52,10 +52,10 @@ public class GrupoController {
 	 */
 	@RequestMapping(value = "crear", method = RequestMethod.POST)
 	public ResponseEntity<FileMessage> crearGrupo(@RequestBody Grupo grupo) throws Exception {
-		
+		System.out.println(grupo.toString());
 		String message = "";
 		grupoService.guardarGrupo(grupo);
-		message = "Se actualizó el Grupo exitosamente";
+		message = "Se Creó el Grupo exitosamente";
 		return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
 	}
 	

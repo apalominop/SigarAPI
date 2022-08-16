@@ -4,14 +4,16 @@
 package com.insitel.iot.controllers;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.insitel.iot.models.InfoSystemDTO;
 import com.insitel.iot.services.InfoSystemService;
 
 /**
@@ -26,10 +28,22 @@ public class InfoSystemController {
 	@Autowired
 	InfoSystemService infoSystemService;
 	
+	/**
+	 * Servicio para obtener la información del equipo donde se aloja el gateway 
+	 * @return
+	 */
 	@RequestMapping(value = "sist", method = RequestMethod.GET)
-	public ArrayList<String> obtenerDatosCPU() {
-		return infoSystemService.obtenerDatosCPU();
+	public ResponseEntity<InfoSystemDTO> obtenerDatosCPU() {
+		
+		Optional<InfoSystemDTO> sistema = infoSystemService.obtenerDatosCPU();
+		if (sistema != null) {
+			return ResponseEntity.ok(sistema.get());
+		} else {
+			return ResponseEntity.noContent().build();
+		}
+		
 	}
+	
 	
 	@RequestMapping(value = "pru", method = RequestMethod.GET)
 	public static void prueba() {
@@ -47,6 +61,8 @@ public class InfoSystemController {
             System.out.println("Disco unidad: " + f + " Tamaño total: " + f.getTotalSpace()
             		+ ", Espacio disponible: " + f.getFreeSpace());
         }
+        
+        
         
 	}
 	
