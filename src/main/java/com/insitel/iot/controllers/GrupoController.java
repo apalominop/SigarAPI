@@ -41,7 +41,7 @@ public class GrupoController {
 	 */
 	@RequestMapping(value = "obtenertodos", method = RequestMethod.GET)
 	public ArrayList<Grupo> obtenerTodosGrupos() throws Exception {
-		return grupoService.obtenerGrupos();
+		return grupoService.traerTodos();
 	}
 	
 	/**
@@ -122,7 +122,7 @@ public class GrupoController {
 			aGrabar.setEstado(grupo.getEstado());
 			
 			grupoService.guardarGrupo(aGrabar);
-			message = "Se cambió el estado del Grupo exitosamente";
+			message = "Se cambió el estado del Grupo exitosamente";
 			return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
 		} else {
 			message = "Error al grabar Grupo";

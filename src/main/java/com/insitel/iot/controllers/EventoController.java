@@ -203,15 +203,15 @@ public class EventoController {
 		for (Object[] objetos : lstEventos) {
 			EventoUsuario eventos = new EventoUsuario();
 			eventos.setId(objetos[0].toString());
-			eventos.setDocumento(objetos[1].toString());
-			eventos.setEventoCodigo(objetos[2].toString());
-			eventos.setCodigoLlave(objetos[3].toString());
+			eventos.setCodigoLlave(objetos[1].toString());
+			eventos.setDocumento(objetos[2].toString());
+			eventos.setEventoCodigo(objetos[3].toString());
 			eventos.setFecha(Date.valueOf(objetos[4].toString()));
-			eventos.setFechaEstimada(Boolean.parseBoolean(objetos[4].toString()));
+			eventos.setFechaEstimada(Boolean.parseBoolean(objetos[5].toString()));
 			eventos.setHora(LocalTime.parse(objetos[6].toString()));
-			eventos.setIdCR(objetos[7].toString());
+			eventos.setNumeroIA(objetos[7].toString());
 			eventos.setNumeroArmario(objetos[8].toString());
-			eventos.setNumeroIA(objetos[9].toString());
+			eventos.setIdCR(objetos[9].toString());
 			lstEvensUser.add(eventos);
 		}
 		return lstEvensUser;
@@ -277,6 +277,7 @@ public class EventoController {
 	public ResponseEntity<ArrayList<EventoUsuario>> obtenerEventsEntreFechaYHora(@RequestBody 
 			FiltroEveUsrsKeysDTO filtro) throws Exception {
 	
+		System.out.println(filtro.toString());
 		Date fechaI = Utils.sumarDias(filtro.getFechaInicio(), 1);
 		Date fechaF = Utils.sumarDias(filtro.getFechaFin(), 1);
 		

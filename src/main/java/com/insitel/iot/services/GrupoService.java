@@ -32,6 +32,10 @@ public class GrupoService {
 		return (ArrayList<Grupo>) grupoRepository.findAll();
 	}
 	
+	public ArrayList<Grupo> traerTodos() throws Exception {
+		return (ArrayList<Grupo>) grupoRepository.traerTodos();
+	}
+	
 	/**
 	 * Método para guardar y actualizar un Grupo
 	 * @param grupo

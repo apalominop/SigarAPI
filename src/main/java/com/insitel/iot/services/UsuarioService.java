@@ -61,4 +61,12 @@ public class UsuarioService {
 		return (ArrayList<Usuario>) usuarioRepository.obtenerUsersActivos();
 	}
 	
+	public Optional<Usuario> obtenerPorDoc(String doc) throws Exception {
+		return usuarioRepository.obtenerPorDoc(doc);
+	}
+	
+//	public Optional<Usuario> obtenerobtenerUsuarioPorDocYId(String doc, Long id) throws Exception {
+//		return usuarioRepository.obtenerUsuarioPorDocYId(doc, id);
+//	}
+	
 }

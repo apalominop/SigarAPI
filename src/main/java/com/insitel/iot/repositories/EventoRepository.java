@@ -132,10 +132,10 @@ public interface EventoRepository extends CrudRepository<Evento, Long> {
 			+ "	  ,mcr_name as cr"
 			+ "	  ,uev_ia_num as ia"
 			+ "	  ,uev_cab_num as armario"
-			+ "    from iot_user_event"
+			+ " from iot_user_event"
 			+ "	inner join iot_user on uev_doc_id = usr_doc_id"
 			+ "	inner join iot_reference on uev_eve_cod = ref_code"
-			+ "	inner join iot_mcr on uev_cr_id = mcr_id"
+			+ "	inner join iot_mcr on CAST(uev_cr_id AS INTEGER) = mcr_id"
 			+ "	where uev_date between ?1 and ?2"
 			+ "	and uev_eve_cod = ?3"
 			+ "	group by keyCod, docUser, nombreUser, evento, fecha, hora, estimada, cr, ia, armario", nativeQuery = true)

@@ -43,7 +43,7 @@ public class LlaveMaestraCRController {
 	}
 
 	/**
-	 * Servicio para actualizar las llaves MAestras del CR
+	 * Servicio para actualizar las llaves Maestras del CR
 	 * @param llave
 	 * @return
 	 * @throws Exception

@@ -29,12 +29,13 @@ import com.insitel.iot.services.UsuarioService;
 @RestController
 @RequestMapping("/iot/usuario")
 public class UsuarioController {
-	
+
 	@Autowired
 	UsuarioService usuarioService;
-	
+
 	/**
 	 * Servicio para obtener todo los usuarios
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -42,30 +43,45 @@ public class UsuarioController {
 	public ArrayList<Usuario> obtenerTodosUsuarios() throws Exception {
 		return usuarioService.obtenerTodosUsuarios();
 	}
-	
+
 	/**
 	 * Servicio para crear un nuevo Usuario
+	 * 
 	 * @param usuario
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "crear", method = RequestMethod.POST)
-	public ResponseEntity<FileMessage> crearUsuario(@RequestBody Usuario usuario) throws Exception {
+	public ResponseEntity<FileMessage> crearUsuario(@RequestBody Usuario usuario) {
 		String message = "";
-		usuarioService.guardarUsuario(usuario);
-		message = "Se creó el Usuario correctamente";
-		return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
+
+		try {
+			Optional<Usuario> u = usuarioService.obtenerPorDoc(usuario.getDocIdentidad());
+			if (u.isPresent()) {
+				message = "No se puede crear el Usuario, Número de Documento ya existe";
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(new FileMessage(message));
+			}
+
+			usuarioService.guardarUsuario(usuario);
+			message = "Se creó el Usuario correctamente";
+			return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
+		} catch (Exception e) {
+			message = "No se pudo crear el Usuario correctamente";
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new FileMessage(message));
+		}
+
 	}
-	
+
 	/**
 	 * Servicio para guardar o modificar campos de un Usuario
+	 * 
 	 * @param usuario
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "actualizar", method = RequestMethod.POST)
 	public ResponseEntity<FileMessage> guardarUsuario(@RequestBody Usuario usuario) throws Exception {
-		
+
 		String message = "";
 		Long id = usuario.getId();
 		String docIdentidad = usuario.getDocIdentidad();
@@ -74,7 +90,7 @@ public class UsuarioController {
 		String celular = usuario.getCelular();
 		String correo = usuario.getCorreo();
 		String telefono = usuario.getTelefono();
-		
+
 		Optional<Usuario> encontrado = usuarioService.buscarUsuarioPorId(id);
 		if (encontrado.isPresent()) {
 			Usuario aGrabar = encontrado.get();
@@ -95,21 +111,21 @@ public class UsuarioController {
 			message = "Error al grabar Usuario";
 			return ResponseEntity.internalServerError().body(new FileMessage(message));
 		}
-		
 	}
-	
+
 	/**
 	 * Servicio para cambiar estado de Usuario
+	 * 
 	 * @param usuario
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "cambiarest", method = RequestMethod.POST)
 	public ResponseEntity<FileMessage> cambiarEstadoUsuario(@RequestBody Usuario usuario) throws Exception {
-		
+
 		String message = "";
 		Long id = usuario.getId();
-		
+
 		Optional<Usuario> encontrado = usuarioService.buscarUsuarioPorId(id);
 		if (encontrado.isPresent()) {
 			Usuario aGrabar = encontrado.get();
@@ -122,9 +138,10 @@ public class UsuarioController {
 			return ResponseEntity.internalServerError().body(new FileMessage(message));
 		}
 	}
-	
+
 	/**
 	 * Servicio para obtener Usuario por Id
+	 * 
 	 * @param id
 	 * @return
 	 * @throws Exception

@@ -23,7 +23,7 @@ public class Usuario {
 	@Column(name = "usr_id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "usr_doc_id", length = 20)
+	@Column(name = "usr_doc_id", unique = true, length = 20)
 	private String docIdentidad;
 
 	@Column(name = "usr_name", length = 100)
